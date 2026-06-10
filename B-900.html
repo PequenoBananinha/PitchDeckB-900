@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B-900 Pitch Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+/* --- CORE CSS --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: #18181b; 
+    display: flex; flex-direction: column; align-items: center; gap: 40px;
+    margin: 0; min-height: 100vh; padding: 40px 0;
+}
+
+/* Base Slide Container - Fixado para 16:9 */
+.slide-container {
+    align-items: center; background-color: #09090b; border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(16, 185, 129, 0.2);
+    display: flex; flex-direction: column; font-family: 'Inter', sans-serif;
+    height: 720px; width: 1280px; justify-content: flex-start; 
+    overflow: hidden; padding: 60px; position: relative; flex-shrink: 0; 
+}
+
+.slide-container::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image: linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px; z-index: 0; pointer-events: none;
+}
+
+.slide-container > * { position: relative; z-index: 1; }
+
+/* --- TYPOGRAPHY --- */
+h1, h2, h3, h4, .number { font-family: 'Space Mono', monospace; color: #fafafa; margin: 0; }
+p, li, th, td, .subtitle, .chart-summary { font-family: 'Inter', sans-serif; color: #a1a1aa; line-height: 1.5; }
+strong, span.accent { color: #10b981; font-weight: 600; }
+
+.slide-container h1 { font-size: 72px; font-weight: 700; letter-spacing: -1px; margin-bottom: 24px; }
+.slide-title { font-size: 42px; font-weight: 700; text-align: left; width: 100%; margin-bottom: 40px; color: #fafafa; border-left: 6px solid #10b981; padding-left: 20px; line-height: 1.2; }
+.slide-container h3 { font-size: 26px; font-weight: 700; margin-bottom: 12px; color: #f4f4f5; }
+.slide-container p, .slide-container li { font-size: 20px; }
+.subtitle { font-size: 28px !important; color: #d4d4d8 !important; margin-bottom: 30px; }
+.content-area { display: flex; flex-direction: column; flex-grow: 1; width: 100%; justify-content: center; }
+
+/* --- LAYOUTS --- */
+.full-bg-image { background-size: cover; background-position: center; justify-content: center; }
+.full-bg-image::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to right, rgba(9,9,11,0.95) 0%, rgba(9,9,11,0.6) 100%); z-index: 0;
+}
+.title-content-wrapper { width: 65%; align-self: flex-start; text-align: left; display: flex; flex-direction: column; justify-content: center; height: 100%; }
+.status-badge { display: inline-block; border: 1px solid #10b981; color: #10b981; font-family: 'Space Mono', monospace; padding: 8px 16px; font-size: 16px; text-transform: uppercase; margin-bottom: 30px; letter-spacing: 1px; align-self: flex-start; }
+
+.two-column { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; width: 100%; }
+.image-wrapper { border-radius: 8px; overflow: hidden; height: 400px; width: 100%; border: 1px solid rgba(16, 185, 129, 0.2); position: relative; }
+.image-wrapper::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(16, 185, 129, 0.1); pointer-events: none; }
+.image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.two-column ul { list-style: none; padding: 0; }
+.two-column li { margin-bottom: 24px; padding-left: 36px; position: relative; }
+.two-column li i { position: absolute; left: 0; top: 6px; color: #10b981; font-size: 20px; }
+
+.bleed-image-layout { padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 0; }
+.bleed-image-layout .content-container { padding: 80px 60px; display: flex; flex-direction: column; height: 100%; justify-content: center; }
+.bleed-image-layout .image-container { height: 720px; width: 100%; position: relative; }
+.bleed-image-layout .image-container::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(16, 185, 129, 0.15); pointer-events: none; }
+.bleed-image-layout img { width: 100%; height: 720px; object-fit: cover; }
+
+.chart-container { display: flex; flex-direction: column; gap: 30px; width: 100%; padding: 20px 0; }
+.bar { display: flex; align-items: center; gap: 20px; }
+.bar .label { flex: 0 0 350px; text-align: right; font-family: 'Space Mono', monospace; font-weight: 700; color: #e4e4e7; font-size: 22px; }
+.bar .bar-inner { flex-grow: 1; background-color: #27272a; height: 50px; border-radius: 4px; overflow: hidden; }
+.bar .bar-fill { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 20px; font-family: 'Space Mono', monospace; font-weight: 700; color: #09090b; font-size: 20px; }
+
+.tiled-content { display: flex; gap: 30px; width: 100%; justify-content: center; align-items: stretch; }
+.tile { flex: 1; background: #18181b; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 40px 30px; text-align: left; display: flex; flex-direction: column; }
+.tile .icon { font-size: 40px; color: #10b981; margin-bottom: 24px; }
+
+.image-tile { flex: 1; text-align: left; background: #18181b; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 30px; }
+.image-tile .image-wrapper { height: 200px; margin-bottom: 20px; border-radius: 4px; }
+.image-tile p { font-size: 16px; line-height: 1.4; } 
+
+.doughnut-chart-container { display: flex; justify-content: center; align-items: center; gap: 50px; width: 100%; padding-top: 10px; }
+.doughnut-chart { width: 300px; height: 300px; border-radius: 50%; background: conic-gradient(#10b981 0% 50%, #3f3f46 50% 85%, #0ea5e9 85% 100%); position: relative; box-shadow: inset 0 0 0 10px #09090b; }
+.doughnut-chart::before { content: 'R$ 35K'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Space Mono', monospace; font-size: 32px; font-weight: 700; color: #fafafa; background: #09090b; width: 180px; height: 180px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1); }
+.legend { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+.legend li { display: flex; align-items: center; font-size: 20px; color: #e4e4e7; }
+.legend .color-box { width: 24px; height: 24px; border-radius: 4px; margin-right: 15px; }
+
+.financial-highlight { background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 24px; border-radius: 8px; margin-top: 30px; text-align: center; }
+.financial-highlight p { font-size: 18px; margin-bottom: 10px;}
+
+.section-title-layout { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; width: 100%; height: 100%; }
+.terminal-prompt { font-family: 'Space Mono', monospace; font-size: 64px; color: #10b981; margin-bottom: 30px; }
+.blinking-cursor { display: inline-block; width: 30px; height: 60px; background-color: #10b981; vertical-align: text-bottom; animation: blink 1s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* --- TIMELINE CSS (SLIDE 7) --- */
+.roadmap-container { background: rgba(16, 185, 129, 0.02); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 40px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+.timeline { border-left: 2px solid #3f3f46; padding-left: 30px; margin-left: 10px; display: flex; flex-direction: column; gap: 40px; }
+.timeline-item { position: relative; }
+.timeline-item::before { content: ''; position: absolute; left: -39px; top: 4px; width: 16px; height: 16px; background: #09090b; border: 3px solid #10b981; border-radius: 50%; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+.timeline-item.future::before { border-color: #3f3f46; box-shadow: none; background: #18181b; }
+.t-phase { font-family: 'Space Mono', monospace; color: #10b981; font-weight: 700; font-size: 16px; margin-bottom: 4px; text-transform: uppercase; }
+.future .t-phase { color: #a1a1aa; }
+.t-title { color: #fafafa; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+.t-desc { color: #a1a1aa; font-size: 16px; line-height: 1.4; }
+
+/* --- PRINT RULES --- */
+@media print {
+    @page { size: 1280px 720px; margin: 0; }
+    body { background-color: #09090b; margin: 0; padding: 0; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .slide-container { width: 1280px !important; height: 720px !important; margin: 0 !important; box-shadow: none !important; border-radius: 0 !important; page-break-after: always; page-break-inside: avoid; }
+}
+    </style>
+</head>
+<body>
+
+<div class="slide-container full-bg-image" id="slide1" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1280&auto=format&fit=crop');">
+    <div class="title-content-wrapper">
+        <div class="status-badge">VOID_SEC_7 // Auditoria de Unidade Local</div>
+        <h1>B-900</h1>
+        <p class="subtitle">Interrogue a máquina. Decida a verdade.</p>
+    </div>
+</div>
+
+<div class="slide-container" id="slide2">
+    <h2 class="slide-title">A Oportunidade (O Problema)</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <ul>
+                    <li><i class="fa-solid fa-code-branch"></i> <strong>A ilusão da escolha narrativa.</strong> Jogadores estão cansados de decisões pré-programadas onde 'A' ou 'B' levam invariavelmente ao mesmo destino.</li>
+                    <li><i class="fa-solid fa-brain"></i> <strong>Busca por transcendência.</strong> O público atual deseja interações profundas, onde a dedução lógica do usuário gere reações autênticas no sistema.</li>
+                    <li><i class="fa-solid fa-ban"></i> <strong>Menus estáticos são obsoletos.</strong> Em jogos investigativos, ler um roteiro rígido de opções quebra completamente a imersão do raciocínio humano.</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=800&auto=format&fit=crop" alt="Classic RPG interface problem concept">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container bleed-image-layout" id="slide3">
+    <div class="content-container">
+        <h2 class="slide-title">A Solução: O B-900</h2>
+        <div class="content-area" style="justify-content: flex-start; padding-top: 20px;">
+            <p style="margin-bottom: 30px;"><span class="accent">Gênero:</span> Thriller Investigativo / Simulador de Engenharia Social.</p>
+            <p style="margin-bottom: 30px;"><strong>Um interrogatório sem scripts.</strong> Esqueça os menus pré-fabricados. Você interage com a máquina digitando livremente e extraindo confissões.</p>
+            <p>Cruze dados físicos com texto livre para apresentar provas irrefutáveis. Quebre os sistemas de defesa conversacionais e decida o veredicto da máquina baseado unicamente nas suas descobertas documentadas.</p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" alt="Clean computer terminal interface">
+    </div>
+</div>
+
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">Proposta de Valor e Validação</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <ul>
+                    <li><i class="fa-solid fa-microchip"></i> <strong>IA Generativa como Mecânica:</strong> Respostas adaptativas processadas em tempo real, eliminando antigos gargalos narrativos e ramificações complexas.</li>
+                    <li><i class="fa-solid fa-check-double"></i> <strong>Validação Real:</strong> O protótipo já foi jogado exaustivamente. A mecânica central foi isolada, testada e validada como inovadora por testadores externos.</li>
+                    <li><i class="fa-solid fa-arrow-trend-up"></i> <strong>Próximos Passos:</strong> Foco brutal na construção do Onboarding interativo e refinamento extremo de UX/UI para retenção de jogadores casuais.</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800&auto=format&fit=crop" alt="CRT monitor showing tense dialogue">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">Mercado de "Burocracia Investigativa"</h2>
+    <div class="content-area">
+        <div class="chart-container">
+            <div class="bar">
+                <div class="label">Papers, Please</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 95%; background: #10b981;">+5 Milhões</div></div>
+            </div>
+            <div class="bar">
+                <div class="label">Return of the Obra Dinn</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 35%; background: #059669;">+1 Milhão</div></div>
+            </div>
+            <div class="bar">
+                <div class="label">B-900 (Projeção Inicial)</div>
+                <div class="bar-inner"><div class="bar-fill" style="width: 15%; background: rgba(16, 185, 129, 0.3); color: #fafafa;">+40 Mil </div></div>
+            </div>
+        </div>
+        <p class="chart-summary" style="text-align: left; max-width: 100%; margin-top: 40px; font-size: 24px; color: #d4d4d8;">
+            O B-900 é um <strong>thriller comercial</strong> que integra um modelo LLM nativo como elemento central de investigação e análise de dados dentro da narrativa.
+        </p>
+    </div>
+</div>
+
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">Arquitetura Técnica & Escalabilidade</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-keyboard"></i></div>
+                <h3>1. Input Nativo</h3>
+                <p>Interface text-based altamente responsiva. O jogador digita comandos livres e cruza termos sem complexidade técnica.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h3>2. Stack Core</h3>
+                <p>Desenvolvido em <strong>Phaser 4</strong> e empacotado nativamente via <strong>Tauri</strong>. Garante um executável leve, performático e portável.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+                <h3>3. Motor Híbrido</h3>
+                <p>Modelos quantizados locais integrados a um fallback instantâneo via Cloud API, eliminando atritos de exigência de hardware no gameplay.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Modelo de Negócios & Roadmap</h2>
+    <div class="content-area">
+        <div class="two-column" style="grid-template-columns: 1fr 1fr; gap: 40px;">
+            <div>
+                <ul style="margin-top: 10px;">
+                    <li style="margin-bottom: 35px;"><i class="fa-solid fa-tag"></i> <strong>Monetização Premium.</strong> A venda direta (Steam/itch.io) financia a operação principal com alto markup digital. Além do marketing orgânico com clips virais.</li>
+                    <li style="margin-bottom: 35px;"><i class="fa-solid fa-cubes"></i> <strong>Arquitetura Modular.</strong> A engine permite a injeção simples de novos roteiros sem reescrever o código mecânico base.</li>
+                    <li><i class="fa-solid fa-money-bill-trend-up"></i> <strong>Escalabilidade.</strong> DLCs recorrentes (novas investigações) com custo de produção técnica de baixo orçamento.</li>
+                </ul>
+            </div>
+            <div class="roadmap-container">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="t-phase">HOJE</div>
+                        <div class="t-title">Fase Alpha</div>
+                        <div class="t-desc">Mecânica core de IA isolada, testada e validada em protótipo jogável.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="t-phase">06º MES</div>
+                        <div class="t-title">Fase Beta</div>
+                        <div class="t-desc">Implementação e refinamento extremo de Onboarding e UX/UI.</div>
+                    </div>
+                    <div class="timeline-item future">
+                        <div class="t-phase">09º MES</div>
+                        <div class="t-title">Lançamento Comercial</div>
+                        <div class="t-desc">Entrega de Vertical Slice de nível comercial visando Publishing Global.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">A Equipe (Capacidade de Execução)</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?q=80&w=400&auto=format&fit=crop" alt="Renato Programmer Portrait">
+                </div>
+                <h3>Renato</h3>
+                <p style="color: #10b981; margin-bottom: 10px; font-family: 'Space Mono', monospace; font-size: 16px;">Programação Core & Game Design</p>
+                <p>Une a base acadêmica de tecnologia ao rigor executivo e foca em soluções escaláveis na parte de desenvolvimento e game design.</p>
+            </div>
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=400&auto=format&fit=crop" alt="Brian Sound Designer Portrait">
+                </div>
+                <h3>Brian</h3>
+                <p style="color: #10b981; margin-bottom: 10px; font-family: 'Space Mono', monospace; font-size: 16px;">QA, Audio & Co-Dev</p>
+                <p>Lidera a garantia de qualidade (QA) estrita e o design sonoro imersivo. Divide o desenvolvimento central, garantindo a densidade e atmosfera do thriller.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">O Pedido: Runway & Alocação</h2>
+    <div class="content-area">
+        <div class="doughnut-chart-container">
+            <div class="doughnut-chart"></div>
+            <ul class="legend">
+                <li><div class="color-box" style="background-color: #10b981;"></div> Direção de Arte Visual (50%)</li>
+                <li><div class="color-box" style="background-color: #3f3f46;"></div> Masterização & QA Final (35%)</li>
+                <li><div class="color-box" style="background-color: #0ea5e9;"></div> Infra Cloud & APIs (15%)</li>
+            </ul>
+        </div>
+        <div class="financial-highlight">
+            <p><strong>Meta:</strong> Finalização da Vertical Slice (Runway calculado: 6 meses).</p>
+            <p><strong>Sweat Equity:</strong> Dedicação integral <em>sem retirada de pró-labore</em> pelos fundadores.</p>
+            <p style="margin-bottom: 0;"><strong>Termos:</strong> Recoup de 50% até devolução integral do aporte, seguido de <span class="accent">15% Rev Share vitalício</span>.</p>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide10">
+    <div class="section-title-layout">
+        <div class="terminal-prompt">
+            > APROVAR OU INCINERAR<span class="blinking-cursor"></span>
+        </div>
+        <p style="font-size: 32px; color: #fafafa; margin-bottom: 15px; font-family: 'Space Mono', monospace;">Faça parte da operação B-900.</p>
+        <p style="font-size: 20px; color: #a1a1aa;">AUDITORIA CONCLUÍDA. AGUARDANDO DECISÃO DA BANCA.</p>
+    </div>
+</div>
+
+</body>
+</html>
+```
