@@ -17,12 +17,17 @@ window.addEventListener('resize', scaleSlides);
 
 // BÔNUS: Sistema de Navegação entre as páginas
 const pages = [
-    'slide01.html', 'slide02.html', 'slide03.html', 'slide04.html', 'slide05.html',
+    'index.html', 'slide02.html', 'slide03.html', 'slide04.html', 'slide05.html',
     'slide06.html', 'slide07.html', 'slide08.html', 'slide09.html', 'slide10.html'
 ];
 
 document.addEventListener('keydown', (e) => {
-    const currentPage = window.location.pathname.split('/').pop() || 'slide01.html';
+    // Pega o nome do arquivo atual. Se estiver vazio (raiz do site), assume que é o index.html
+    let currentPage = window.location.pathname.split('/').pop();
+    if (currentPage === '' || currentPage === '/') {
+        currentPage = 'index.html';
+    }
+    
     const currentIndex = pages.indexOf(currentPage);
     
     if (e.key === 'ArrowRight' && currentIndex < pages.length - 1) {
